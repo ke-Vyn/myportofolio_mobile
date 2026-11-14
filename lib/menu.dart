@@ -142,7 +142,15 @@ class ItemCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+              SnackBar(
+                content: Text(
+                  "Kamu telah menekan tombol ${item.name}!",
+                  style: const TextStyle(color: Colors.white),
+                ),
+                backgroundColor: item.color,
+                behavior: SnackBarBehavior.floating,
+                duration: const Duration(seconds: 2),
+              ),
             );
         },
         child: Container(
