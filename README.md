@@ -105,3 +105,78 @@
 ## D. AI Disclosure :
 - Tool used: Gemini AI
 - How it was used: Diskusi dan eksplorasi konsep teknis dalam menyusun jawaban pertanyaan reflektif.
+
+
+# 21/11/2026 - Tugas 8
+## A. Weekly Instruction Step :
+> **Prasyarat Versi & Perangkat Lunak**
+> - Flutter SDK : Versi 3.22.x atau lebih baru
+> - Dart SDK : Versi 3.4.x atau lebih baru
+> - Android Studio : Versi 2024.x (Koala / Ladybug):
+>   - Android SDK Build-Tools: Versi 34.0.0 / kompatibel
+>   - Android SDK Command-line Tools (latest) via SDK Manager
+>   - Android SDK Platform-Tools
+> - Java Development Kit (JDK): OpenJDK versi 17
+> - Visual Studio Code / Android Studio IDE:
+>   - Ekstensi Flutter (oleh Dart Code).
+>   - Ekstensi Dart (otomatis terpasang bersama Flutter).
+> - Web Browser: Google Chrome atau browser lain untuk target
+--- 
+1. Clone this repository `git clone https://github.com/ke-Vyn/myportofolio_mobile.git` `cd myportofolio_mobile`
+2. Ensure Flutter SDK is installed and added to PATH `flutter --version`
+3. Install project dependencies `flutter pub get`
+4. Run code analysis / linter check `flutter analyze`
+5. Run the application:
+    - For web (Chrome): `flutter run -d chrome`
+    - For web server (any browser): `flutter run -d web-server --web-port 8080`
+    - For Android emulator / physical device: `flutter run`
+6. If running via web-server, open http://localhost:8080 in any browser
+
+## B. Weekly Updates :
+1. Membuat file `lib/screens/education_form.dart` menggunakan `StatefulWidget`, `Form`, dan `GlobalKey<FormState>`. Mengimpmlementasikan 5 elemen input sesuai model edukasi (Nama institusi, jenjang pendidikan, jurusan, tahun mulai/lulus, deskripsi). 
+2. Menerapkan validasi input pada form edukasi (menolak input kosong/spasi, validasi rentang tahun 1900–2100, dan pengecekan agar tahun lulus tidak lebih kecil dari tahun mulai).
+3. Menambahkan tombol Simpan dengan `AlertDialog` untuk menampilkan ringkasan data valid, dilengkapi tombol Tutup yang sekaligus mereset formulir.
+4. Mengintegrasikan tombol aksi baru "Tambah Edukasi" (`Icons.school`) pada `lib/screens/menu.dart` dan mengonfigurasi navigasi `Navigator.push()` di `lib/widgets/project_card.dart`.
+5. Menambahkan opsi navigasi "Add Education" menggunakan `Navigator.pushReplacement()` pada `lib/widgets/left_drawer.dart` dan menyematkan komponen `LeftDrawer` ke dalam `EducationFormPage`
+
+## C. Reflection : 
+### Assignment 7
+1. - `Navigator.push()` --> menambahkan (push) route/halaman baru ke puncak navigation stack. Halaman sebelumnya tetap tersimpan di bawahnya sehingga user dapat kembali dengan menekan tombol back
+    - `Navigator.pushReplacement()` -->  mengganti route teratas saat ini dengan route baru. Halaman lama dibuang dari stack sehingga pengguna tidak dapat kembali ke halaman sebelumnya melalui tombol back
+    - `Navigator.pop()` -->  menghapus (pop) route teratas dari stack dan kembali menampilkan halaman tepat di bawahnya (biasanya untuk menutup modal dialog atau drawer)
+    - Metode yang digunakan pada kartu aksi adalah `Navigator.push()`, karena alurnya bersifat hierarkis dari beranda menuju formulir, sehingga pengguna tetap memiliki opsi kembali ke beranda melalui tombol back bawaan perangkat 
+    - Mekanisme opsi Home di drawer --> Menggunakan `Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage()))`. Halaman form yang sedang aktif langsung digantikan oleh halaman beranda, mencegah terjadinya penumpukan halaman yang berlebihan pada stack navigasi.
+
+    &nbsp;
+    
+2. - `Scaffold` berfungsi sebagai root layout dasar berstandar Material Design yang menyediakan slot struktur visual halaman melalui properti `appBar`, `drawer`, dan `body`
+
+    - `AppBar` menstandarkan komponen top bar pada setiap screen, termasuk penyelarasan judul (`title`), ketinggian bayangan (`elevation`), serta penempatan otomatis tombol pemicu drawer (`leading`) maupun back button pada navigation stack
+
+    - `Drawer` berperan sebagai komponen reusable navigation menu (umumnya menampung `ListView` & `ListTile`) yang menyediakan akses routing terpusat dan konsisten di seluruh screen dalam aplikasi.
+
+Contoh Penggunaan Warna Tema Portofolio: Warna `Colors.indigo` digunakan secara konsisten sebagai latar belakang `AppBar` pada halaman utama (`menu.dart`), form proyek (`project_form.dart`), form edukasi (`education_form.dart`), latar belakang `DrawerHeader` (`left_drawer.dart`), serta tombol aksi utama Simpan.
+
+    &nbsp;
+    
+3. - Form menggunakan susunan vertikal (Column di dalam Form) karena alur pengisian data secara intuitif berjalan dari atas ke bawah. Ini memberikan hierarki pembacaan label dan isian yang rapi pada layar perangkat mobile.
+
+    - Widget Pengatur Jarak (`Padding`, `SizedBox`) memberikan margin di sekeliling form agar input tidak menempel ke tepi layar (`insets`) & memberikan jarak terukur antar-elemen input untuk mempermudah fokus sentuhan jari user
+    
+    - Widget Penggulir (`SingleChildScrollView`) mengantisipasi keterbatasan ruang layar ketika keyboard virtual muncul. Dengan `SingleChildScrollView`, seluruh form tetap dapat digulir dan tombol simpan tetap dapat diakses. Tanpa widget, ruang layar yang menyempit karena keyboard akan memicu error luapan piksel (RenderFlex overflowed) 
+
+    &nbsp;
+    
+4. - `GlobalKey<FormState>` --> kunci identitas unik yang memberikan akses langsung ke status internal (`FormState`) dari widget `Form`
+
+    - `validator` --> logika pemeriksaan pada masing-masing field input yang mengembalikan pesan kesalahan (string) jika input tidak valid, atau `null` jika valid.
+
+    - `validate()` --> method yang dipicu oleh `_formKey.currentState!.validate()` saat tombol Simpan ditekan untuk mengeksekusi seluruh fungsi validator pada field secara serentak. Jika ada satu saja validator yang tidak mengembalikan null, form dinyatakan gagal divalidasi.
+
+    - Contoh nilai ditolak --> pengisian tahun lulus 2020 & tahun mulai 2024, atau pengisian tahun di luar rentang, contohnya 99999 atau angka negatif.
+
+    - Alasan Memilih Jenis Input/Papan Ketik Saja Belum Cukup --> pengaturan seperti `keyboardType: TextInputType.number` hanya membatasi tampilan tombol keyboard, tetapi tidak dapat mencegah input copy-paste yang tidak sesuai maupun memeriksa logika bisnis (cth: input kosong, rentang nilai, dan relasi tahun lulus >= tahun mulai), sehingga validasi programatik via validator tetap wajib.
+
+## D. AI Disclosure :
+- Tool used: Gemini AI
+- How it was used: Diskusi konsep arsitektur navigasi Flutter serta manajemen state formulir menggunakan GlobalKey.
