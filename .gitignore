@@ -1,3 +1,6 @@
+# Generated json_serializable files
+*.g.dart
+
 # Miscellaneous
 *.class
 *.log

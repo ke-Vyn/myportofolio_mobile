@@ -140,7 +140,7 @@
 5. Menambahkan opsi navigasi "Add Education" menggunakan `Navigator.pushReplacement()` pada `lib/widgets/left_drawer.dart` dan menyematkan komponen `LeftDrawer` ke dalam `EducationFormPage`
 
 ## C. Reflection : 
-### Assignment 7
+### Assignment 8
 1. - `Navigator.push()` --> menambahkan (push) route/halaman baru ke puncak navigation stack. Halaman sebelumnya tetap tersimpan di bawahnya sehingga user dapat kembali dengan menekan tombol back
     - `Navigator.pushReplacement()` -->  mengganti route teratas saat ini dengan route baru. Halaman lama dibuang dari stack sehingga pengguna tidak dapat kembali ke halaman sebelumnya melalui tombol back
     - `Navigator.pop()` -->  menghapus (pop) route teratas dari stack dan kembali menampilkan halaman tepat di bawahnya (biasanya untuk menutup modal dialog atau drawer)
