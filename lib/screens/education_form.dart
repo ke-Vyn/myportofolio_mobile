@@ -12,7 +12,7 @@ class _EducationFormPageState extends State<EducationFormPage> {
   final _formKey = GlobalKey<FormState>();
 
   String _institution = "";
-  String _degree = "Sarjana (S1)"; 
+  String _degree = "Sarjana (S1)";
   String _fieldOfStudy = "";
   int? _startYear;
   int? _endYear;
@@ -133,7 +133,11 @@ class _EducationFormPageState extends State<EducationFormPage> {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 4.0),
+                        padding: const EdgeInsets.only(
+                          top: 8.0,
+                          bottom: 8.0,
+                          right: 4.0,
+                        ),
                         child: TextFormField(
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
@@ -153,7 +157,9 @@ class _EducationFormPageState extends State<EducationFormPage> {
                               return "Wajib diisi!";
                             }
                             final parsed = int.tryParse(value);
-                            if (parsed == null || parsed < 1900 || parsed > 2100) {
+                            if (parsed == null ||
+                                parsed < 1900 ||
+                                parsed > 2100) {
                               return "Tahun tidak valid!";
                             }
                             return null;
@@ -163,7 +169,11 @@ class _EducationFormPageState extends State<EducationFormPage> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 4.0),
+                        padding: const EdgeInsets.only(
+                          top: 8.0,
+                          bottom: 8.0,
+                          left: 4.0,
+                        ),
                         child: TextFormField(
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
@@ -183,7 +193,9 @@ class _EducationFormPageState extends State<EducationFormPage> {
                               return "Wajib diisi!";
                             }
                             final parsed = int.tryParse(value);
-                            if (parsed == null || parsed < 1900 || parsed > 2100) {
+                            if (parsed == null ||
+                                parsed < 1900 ||
+                                parsed > 2100) {
                               return "Tahun tidak valid!";
                             }
                             if (_startYear != null && parsed < _startYear!) {
@@ -239,7 +251,9 @@ class _EducationFormPageState extends State<EducationFormPage> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Edukasi Berhasil Ditambahkan!'),
+                              title: const Text(
+                                'Edukasi Berhasil Ditambahkan!',
+                              ),
                               content: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

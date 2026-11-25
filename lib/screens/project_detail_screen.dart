@@ -31,8 +31,11 @@ class ProjectDetailScreen extends StatelessWidget {
                     height: 200,
                     color: Colors.grey[300],
                     child: const Center(
-                      child: Icon(Icons.broken_image,
-                          size: 50, color: Colors.grey),
+                      child: Icon(
+                        Icons.broken_image,
+                        size: 50,
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
                 ),
@@ -58,32 +61,20 @@ class ProjectDetailScreen extends StatelessWidget {
             const SizedBox(height: 16.0),
             const Text(
               'Description:',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4.0),
-            Text(
-              project.description,
-              style: const TextStyle(fontSize: 16.0),
-            ),
+            Text(project.description, style: const TextStyle(fontSize: 16.0)),
             if (project.projectUrl.isNotEmpty) ...[
               const SizedBox(height: 16.0),
               const Text(
                 'Project URL:',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4.0),
               SelectableText(
                 project.projectUrl,
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.blue,
-                ),
+                style: const TextStyle(fontSize: 16.0, color: Colors.blue),
               ),
             ],
           ],
