@@ -157,8 +157,6 @@
 
 Contoh Penggunaan Warna Tema Portofolio: Warna `Colors.indigo` digunakan secara konsisten sebagai latar belakang `AppBar` pada halaman utama (`menu.dart`), form proyek (`project_form.dart`), form edukasi (`education_form.dart`), latar belakang `DrawerHeader` (`left_drawer.dart`), serta tombol aksi utama Simpan.
 
-    &nbsp;
-    
 3. - Form menggunakan susunan vertikal (Column di dalam Form) karena alur pengisian data secara intuitif berjalan dari atas ke bawah. Ini memberikan hierarki pembacaan label dan isian yang rapi pada layar perangkat mobile.
 
     - Widget Pengatur Jarak (`Padding`, `SizedBox`) memberikan margin di sekeliling form agar input tidak menempel ke tepi layar (`insets`) & memberikan jarak terukur antar-elemen input untuk mempermudah fokus sentuhan jari user
